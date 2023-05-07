@@ -1,12 +1,11 @@
 package ru.tinkoff.edu.java.linkparser.parser.api;
 
+import java.net.URI;
+import java.util.regex.Pattern;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.tinkoff.edu.java.linkparser.model.answer.NotMatchedUriParserAnswer;
 import ru.tinkoff.edu.java.linkparser.model.answer.UriParserAnswer;
-
-import java.net.URI;
-import java.util.regex.Pattern;
 
 public abstract class CommonUriParser implements UriParser {
 
@@ -27,9 +26,13 @@ public abstract class CommonUriParser implements UriParser {
 
     @Override
     public UriParserAnswer parse(String uri) {
-        if (uri == null) return null;
+        if (uri == null) {
+            return null;
+        }
         var parsedUri = parseToUri(uri);
-        if (parsedUri == null) return null;
+        if (parsedUri == null) {
+            return null;
+        }
         var uriAuthority = parsedUri.getAuthority();
         if (processedAuthority.equals(uriAuthority)) {
             var uriParserAnswer = extractPayloadFromUri(parsedUri);

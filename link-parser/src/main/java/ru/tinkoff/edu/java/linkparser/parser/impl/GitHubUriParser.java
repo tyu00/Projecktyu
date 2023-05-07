@@ -1,12 +1,11 @@
 package ru.tinkoff.edu.java.linkparser.parser.impl;
 
+import java.net.URI;
+import java.util.regex.Pattern;
 import ru.tinkoff.edu.java.linkparser.model.UserAndRepo;
 import ru.tinkoff.edu.java.linkparser.model.answer.GitHubUriParserAnswer;
 import ru.tinkoff.edu.java.linkparser.model.answer.UriParserAnswer;
 import ru.tinkoff.edu.java.linkparser.parser.api.CommonUriParser;
-
-import java.net.URI;
-import java.util.regex.Pattern;
 
 public final class GitHubUriParser extends CommonUriParser {
 
@@ -21,9 +20,12 @@ public final class GitHubUriParser extends CommonUriParser {
     @Override
     protected UriParserAnswer extractPayloadFromUri(URI parsedUri) {
         var matcher = pattern.matcher(parsedUri.getPath());
-        if (matcher.find()) return new GitHubUriParserAnswer(
+        if (matcher.find()) {
+            return new GitHubUriParserAnswer(
                 new UserAndRepo(matcher.group(USER_REGEXP_GROUP_NUMBER), matcher.group(REPO_REGEXP_GROUP_NUMBER))
-        );
-        else return null;
+            );
+        } else {
+            return null;
+        }
     }
 }

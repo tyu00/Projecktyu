@@ -1,11 +1,10 @@
 package ru.tinkoff.edu.java.linkparser.parser.impl;
 
+import java.net.URI;
+import java.util.regex.Pattern;
 import ru.tinkoff.edu.java.linkparser.model.answer.StackOverflowUriParserAnswer;
 import ru.tinkoff.edu.java.linkparser.model.answer.UriParserAnswer;
 import ru.tinkoff.edu.java.linkparser.parser.api.CommonUriParser;
-
-import java.net.URI;
-import java.util.regex.Pattern;
 
 public final class StackOverflowUriParser extends CommonUriParser {
 
@@ -19,9 +18,12 @@ public final class StackOverflowUriParser extends CommonUriParser {
     @Override
     protected UriParserAnswer extractPayloadFromUri(URI parsedUri) {
         var matcher = pattern.matcher(parsedUri.getPath());
-        if (matcher.find()) return new StackOverflowUriParserAnswer(
+        if (matcher.find()) {
+            return new StackOverflowUriParserAnswer(
                 Long.parseLong(matcher.group(QUESTION_ID_REGEXP_GROUP_NUMBER))
-        );
-        else return null;
+            );
+        } else {
+            return null;
+        }
     }
 }

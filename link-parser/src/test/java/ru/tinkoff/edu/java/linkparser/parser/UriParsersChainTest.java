@@ -33,29 +33,35 @@ public class UriParsersChainTest {
     }
 
     public static Stream<Arguments> getArgumentsForDoParseTest() {
-        Stream<Arguments> tyu00 = Stream.of(
+        return Stream.of(
                 Arguments.of(
-                        "https://github.com/Tyu00/some-repo",
-                        new GitHubUriParserAnswer(new UserAndRepo("Tyu00", "some-repo"))
+                    "https://github.com/VladimirZaitsev21/some-repo",
+                    new GitHubUriParserAnswer(new UserAndRepo("VladimirZaitsev21", "some-repo"))
                 ),
                 Arguments.of(
-                        "https://github.com/Tyu00?tab=repositories",
-                        new NotMatchedUriParserAnswer()
+                    "https://stackoverflow.com/questions/1642028/what-is-the-operator-in-c",
+                    new StackOverflowUriParserAnswer(1642028)
                 ),
                 Arguments.of(
-                        "https://stackoverflow.com/questions",
-                        new NotMatchedUriParserAnswer()
+                    "https://github.com/VladimirZaitsev21?tab=repositories",
+                    new NotMatchedUriParserAnswer()
                 ),
                 Arguments.of(
-                        "https://bitbucket.org/Tyu00/some-repo",
-                        null
+                    "https://stackoverflow.com/questions",
+                    new NotMatchedUriParserAnswer()
                 ),
-
                 Arguments.of(
-                        null,
-                        null
+                    "https://bitbucket.org/VladimirZaitsev21/some-repo",
+                    null
+                ),
+                Arguments.of(
+                    "htt://stackoverflow.com/questions/1642028/what-is-the-operator-in-c java",
+                    null
+                ),
+                Arguments.of(
+                    null,
+                    null
                 )
         );
-        return tyu00;
     }
 }

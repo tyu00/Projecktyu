@@ -6,6 +6,7 @@ import ru.tinkoff.edu.java.linkparser.parser.api.UriParser;
 public final class UnsupportedUriParser implements UriParser {
 
     private UriParser nextParser;
+
     @Override
     public void setNext(UriParser next) {
         this.nextParser = next;
